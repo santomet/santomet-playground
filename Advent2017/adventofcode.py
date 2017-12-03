@@ -82,3 +82,59 @@ def advent2_2(data):
             total += get_first_even_divide(num, item_list)
     return total
 
+def get_sum_near(matrix, x, y):  # matrix is dictionary/map
+    total = 0
+    for xx,yy in [[1,0],[1,1],[0,1],[-1,1],[-1,0],[-1,-1],[0,-1],[1,-1]]:
+        xx = xx + x
+        yy = yy + y
+        if (xx,yy) in matrix:
+            total += matrix[(xx,yy)]
+    return total
+
+def advent3(data):
+    num = int(data) - 1
+    x = 0
+    y = 0
+    steps = 1
+    used_steps = 0
+    direction = 3  # 0:north 1:west 2:south 3:east
+    turns = 0
+
+    # for part 2:
+    matrix = {(0,0): 1}  # for simplicity, we can easily address this with negative integers
+    first_higher = 0
+    # -----------------------
+    for i in range(num):
+        if direction == 0:
+            y += 1
+        elif direction == 1:
+            x -= 1
+        elif direction == 2:
+            y -= 1
+        elif direction == 3:
+            x += 1
+
+        used_steps += 1
+
+        if used_steps == steps:
+            direction = (direction + 1)%4
+            turns += 1
+            used_steps = 0
+            if turns%2 == 0:
+                steps += 1
+
+        # for part 2:
+        if first_higher == 0:
+            val = get_sum_near(matrix, x, y)
+            matrix[(x,y)] = val
+            if val > num:
+                first_higher = val
+        # --------------------------------
+    dist = abs(x) + abs(y)
+    print("task 1: {}; task 2: {}".format(dist, first_higher))
+
+
+
+
+    
+
