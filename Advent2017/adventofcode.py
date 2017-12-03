@@ -1,5 +1,6 @@
 import math
 
+# DAY 1 -------------------------------------------------------------
 def advent1(data):
     num_str_list = list(data)
     while num_str_list[0] == num_str_list[-1]:
@@ -25,7 +26,6 @@ def advent1(data):
 
     return total
 
-
 def get_circ_index(index, count):
     if index >= count:
         index = index - count
@@ -45,7 +45,7 @@ def advent1_2(data):
             total += int(num_str_list[i])
     return total
 
-
+# DAY 2 ----------------------------------------------------------------
 def advent2(data):
     row_list = data.split('\n')
     total = 0
@@ -82,6 +82,7 @@ def advent2_2(data):
             total += get_first_even_divide(num, item_list)
     return total
 
+# DAY 3 -----------------------------------------------------------------------
 def get_sum_near(matrix, x, y):  # matrix is dictionary/map
     total = 0
     for xx,yy in [[1,0],[1,1],[0,1],[-1,1],[-1,0],[-1,-1],[0,-1],[1,-1]]:
@@ -133,8 +134,5 @@ def advent3(data):
     dist = abs(x) + abs(y)
     print("task 1: {}; task 2: {}".format(dist, first_higher))
 
-
-
-
-    
-
+# DAY 4 -----------------------------------------------------------
+#TBD
