@@ -171,7 +171,8 @@ def advent4(data):
             total += 1
             if valid_noana:
                 total_noana += 1
-    print("task 1: {}; task 2: {}".format(total, total_noana))
 
 # DAY 5 -----------------------------------------------------------------------
 # TBD
+
+    print("task 1: {}; task 2: {}".format(total, total_noana))
