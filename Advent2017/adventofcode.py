@@ -135,4 +135,44 @@ def advent3(data):
     print("task 1: {}; task 2: {}".format(dist, first_higher))
 
 # DAY 4 -----------------------------------------------------------
-#TBD
+# note: i know that searching for duplicities can be slightly more effective
+# buh in this case... fck it
+def contains_anagrams(word_list):
+    ltc_ml = []  # list of "letter to count" maps
+    for word in word_list:
+        word = list(word)
+        dct = {}
+        for c in word:
+            if c not in dct:
+                dct[c] = word.count(c)
+        ltc_ml.append(dct)
+    for dct in ltc_ml:
+        if ltc_ml.count(dct) > 1:
+            return True
+    return False
+
+def advent4(data):
+    passp_list = data.split('\n')
+    total = 0
+    total_noana = 0
+    for passp in passp_list:
+        valid = True
+        valid_noana = True
+        word_list = passp.split()
+        if len(word_list) < 2:
+            valid = False
+        for word in word_list:
+            if word_list.count(word)>1:
+                valid = False
+        if contains_anagrams(word_list):
+            valid_noana = False
+            
+        if valid:
+            total += 1
+            if valid_noana:
+                total_noana += 1
+
+# DAY 5 -----------------------------------------------------------------------
+# TBD
+
+    print("task 1: {}; task 2: {}".format(total, total_noana))
