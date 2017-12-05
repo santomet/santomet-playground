@@ -174,4 +174,36 @@ def advent4(data):
     print("task 1: {}; task 2: {}".format(total, total_noana))
 
 # DAY 5 -----------------------------------------------------------------------
+def advent5(data):
+    str_list = data.split('\n')
+    int_list = list(map(int, str_list))
+    int_list_2 = int_list[:]
+    i = 0
+    i2 = 0
+    steps = 0
+    steps_2 = 0
+    length = len(int_list)
+    first_running = True
+    second_running = True
+    while first_running or second_running:
+        if i >= 0 and i < length:
+            move = int_list[i]
+            int_list[i] += 1
+            i += move
+            steps += 1
+        else:
+            first_running = False
+        if i2 >= 0 and i2 < length:
+            move = int_list_2[i2]
+            if int_list_2[i2] >= 3:
+                int_list_2[i2] -= 1
+            else:
+                int_list_2[i2] += 1
+            i2 += move
+            steps_2 += 1
+        else:
+            second_running = False
+    print("task 1: {}; task 2: {}".format(steps, steps_2))
+
+# DAY 6 ----------------------------------------------------------------------
 # TBD
