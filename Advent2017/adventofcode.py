@@ -207,3 +207,58 @@ def advent5(data):
 
 # DAY 6 ----------------------------------------------------------------------
 # TBD
+
+
+
+
+def main():
+    last_solved = 5
+    txt = """
+      __   ____  _  _  ____  __ _  ____       ____   __    __  ____ 
+     / _\ (    \/ )( \(  __)(  ( \(_  _)     (___ \ /  \  /  \(__  )
+    /    \ ) D (\ \/ / ) _) /    /  )(  ____  / __/(  0 )(_/ /  / / 
+    \_/\_/(____/ \__/ (____)\_)__) (__)(____)(____) \__/  (__) (_/
+                                             github.com/santomet
+
+    Hello and welcome! For exit enter e!
+    """
+    print(txt)
+    while True:
+        num = input("Which day do you want to solve? Day ")
+        if num == 'e':
+            break
+        if not num.isnumeric():
+            continue
+
+        num = int(num)
+        print("You have selected Day {}".format(num));
+        if num < 1 or num > last_solved:
+            print("This day is not defined! Please try another one")
+            continue
+
+        print("now, please enter your puzzle input. Afterwards, press ENTER twice")
+        data_thisline = input()
+        data = ""
+        while not data_thisline == "":
+            data += data_thisline
+            data_thisline = input()
+            if not data_thisline == "":
+                data += '\n'
+        if data == 'e':
+            break
+
+        print("COMPUTING.......")
+        
+        if num == 1:
+            print("task 1: {}; task 2: {}".format(advent1(data), advent1_2(data)))
+        elif num == 2:
+            print("task 1: {}; task 2: {}".format(advent2(data), advent2_2(data)))
+        elif num == 3:
+            advent3(data)
+        elif num == 4:
+            advent4(data)
+        elif num == 5:
+            advent5(data)
+
+if __name__ == "__main__":
+    main()
