@@ -206,13 +206,43 @@ def advent5(data):
     print("task 1: {}; task 2: {}".format(steps, steps_2))
 
 # DAY 6 ----------------------------------------------------------------------
-# TBD
+def advent6(data):
+    str_list = data.split()
+    int_list = list(map(int, str_list))
+    if not len(int_list) == 16:
+        print("ERROR!, only 16 values are allowed for day 6")
+        return
+    steps = 0
+    steps_2 = 0
+    history_list = []
+    second_part_list = []
+    found_first_task = False
+    while True:
+        if not found_first_task:
+            history_list.append(int_list[:])
+        grt = max(int_list)
+        i = int_list.index(grt)
+        int_list[i] = 0
+        for n in range(grt):
+            i = (i+1)%16
+            int_list[i] += 1
+        if not found_first_task:
+            if history_list.count(int_list) == 0:
+                steps += 1
+            else:
+                found_first_task = True
+                steps += 1  # add one step
+                second_part_list = int_list[:]
+        else:
+            steps_2 += 1
+            if second_part_list == int_list:
+                break
 
-
+    print("task 1:{}; task 2: {}".format(steps, steps_2))
 
 
 def main():
-    last_solved = 5
+    last_solved = 6
     txt = """
       __   ____  _  _  ____  __ _  ____       ____   __    __  ____ 
      / _\ (    \/ )( \(  __)(  ( \(_  _)     (___ \ /  \  /  \(__  )
@@ -259,6 +289,8 @@ def main():
             advent4(data)
         elif num == 5:
             advent5(data)
+        elif num == 6:
+            advent6(data)
 
 if __name__ == "__main__":
     main()
