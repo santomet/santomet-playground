@@ -240,9 +240,105 @@ def advent6(data):
 
     print("task 1:{}; task 2: {}".format(steps, steps_2))
 
+# DAY 7-------------------------------------------------------------
+# too much oop, solutions on reddit caused a depression...
+
+class Program:
+    def __init__(self, name, weight):
+        self.name = name
+        self.weight = weight
+        self.parent = None
+        self.children = []
+        
+        self.total_weight = weight
+        self.total_children = 0
+
+    def __str__(self):
+        return self.name
+    def __eq__(self, other):
+        return self.name == other.name
+
+    def propagate_info_to_root(self, weight_to_add):
+        self.total_children += 1
+        self.total_weight += weight_to_add
+        if self.parent is not None:
+            self.parent.propagate_info_to_root(weight_to_add)
+
+    def add_child(self, program):
+        program.parent = self
+        self.children.append(program)
+        self.propagate_info_to_root(program.total_weight)
+
+def advent7(data):
+    line_list = data.split('\n')
+    program_list = []
+
+    for line in line_list:
+        values_list = line.split()
+        name = values_list[0]
+        weight_str = values_list[1][1:-1]
+        weight = int(weight_str)
+        program_list.append(Program(name, weight))
+
+    for line in line_list:
+        values_list = line.split(" -> ")
+        if not len(values_list) == 2:
+            continue
+        name_and_weight = values_list[0].split()
+        name = name_and_weight[0]
+
+        children_str_list = values_list[1].split(", ")
+
+        children_list = []
+        program = None
+        for prog in program_list:
+            if prog.name == name:
+                program = prog
+            if prog.name in children_str_list:
+                children_list.append(prog)
+
+        for prog in children_list:
+            program.add_child(prog)
+
+    #now find the greatest
+    max_children = 0
+    max_program = None
+    for prog in program_list:
+        if prog.total_children > max_children:
+            max_children = prog.total_children
+            max_program = prog
+
+    #now find the fucking traitor            
+    correct = 0
+    prog = max_program
+    while True:
+        num_to_count = {}
+        for child in prog.children:
+            if child.total_weight not in num_to_count:
+                num_to_count[child.total_weight] = 1
+            else:
+                num_to_count[child.total_weight] += 1
+
+        if len(num_to_count) <= 1:
+            break
+        
+        sort = [(k, num_to_count[k]) for k in sorted(num_to_count, key=num_to_count.get)]
+        changed = False
+        for child in prog.children:
+           if child.total_weight == sort[0][0]:
+               prog = child
+               correct = child.weight + (sort[1][0] - sort[0][0])
+               changed = True
+            
+            
+    print("tast1:{}; task2:{}".format(max_program.name, correct))
+
+# DAY 8 ---------------------------------------------------------------
+# TBD
+
 
 def main():
-    last_solved = 6
+    last_solved = 7
     txt = """
       __   ____  _  _  ____  __ _  ____       ____   __    __  ____ 
      / _\ (    \/ )( \(  __)(  ( \(_  _)     (___ \ /  \  /  \(__  )
@@ -291,6 +387,8 @@ def main():
             advent5(data)
         elif num == 6:
             advent6(data)
+        elif num == 7:
+            advent7(data)
 
 if __name__ == "__main__":
     main()
