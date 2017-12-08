@@ -1,4 +1,5 @@
 import math
+from operator import itemgetter
 
 # DAY 1 -------------------------------------------------------------
 def advent1(data):
@@ -334,11 +335,76 @@ def advent7(data):
     print("tast1:{}; task2:{}".format(max_program.name, correct))
 
 # DAY 8 ---------------------------------------------------------------
-# TBD
+def advent8(data):
+    lines = data.split('\n')
+    registers = {}
+    highest_ever = None
+    for line in lines:
+        line = line.split()
 
+        reg = line[0]
+        instr = line[1]
+        val = line[2]
+        cond_reg = line[4]
+        cond = line[5]
+        cond_val = line[6]
+
+        val = int(val)
+        cond_val = int(cond_val)
+
+        cond_fulf = False
+        
+        if reg not in registers:
+            registers[reg] = 0
+
+        if cond_reg not in registers:
+            registers[cond_reg] = 0
+
+        if cond == ">":
+            if registers[cond_reg] > cond_val:
+                cond_fulf = True
+        if cond == "<":
+            if registers[cond_reg] < cond_val:
+                cond_fulf = True
+        if cond == ">=":
+            if registers[cond_reg] >= cond_val:
+                cond_fulf = True
+        if cond == "<=":
+            if registers[cond_reg] <= cond_val:
+                cond_fulf = True
+        if cond == "==":
+            if registers[cond_reg] == cond_val:
+                cond_fulf = True
+        if cond == "!=":
+            if registers[cond_reg] != cond_val:
+                cond_fulf = True
+
+        if cond_fulf:
+            if instr == "inc":
+                registers[reg] += val
+            elif instr == "dec":
+                registers[reg] -= val
+
+        if highest_ever is None:
+            highest_ever = registers[reg]
+        elif highest_ever < registers[reg]:
+            highest_ever = registers[reg]
+
+    v = list(registers.values())
+    k = list(registers.keys())
+    max_register_value = max(v)
+
+    print("tast1:{}; task2:{}".format(max_register_value, highest_ever))
+
+
+# DAY 9 -----------------------------------------------------------------------
+# TBD
+        
+
+        
 
 def main():
-    last_solved = 7
+    last_solved = 8
     txt = """
       __   ____  _  _  ____  __ _  ____       ____   __    __  ____ 
      / _\ (    \/ )( \(  __)(  ( \(_  _)     (___ \ /  \  /  \(__  )
@@ -389,6 +455,8 @@ def main():
             advent6(data)
         elif num == 7:
             advent7(data)
+        elif num == 8:
+            advent8(data)
 
 if __name__ == "__main__":
     main()
