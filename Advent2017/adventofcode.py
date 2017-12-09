@@ -398,13 +398,43 @@ def advent8(data):
 
 
 # DAY 9 -----------------------------------------------------------------------
-# TBD
-        
 
-        
+
+def advent9(data):
+    char_list = list(data)
+    score = 0
+    garbage_score = 0
+    is_garbage = False
+    ignore_next = False
+    nesting = 0
+
+    for char in char_list:
+        if is_garbage:
+            if ignore_next:
+                ignore_next = False
+            else:
+                if char == '>':
+                    is_garbage = False
+                elif char == '!':
+                    ignore_next = True
+                else:
+                    garbage_score += 1
+
+        elif char == '<':
+            is_garbage = True
+        elif char == '{':
+            nesting += 1
+            score += nesting
+        elif char == '}':
+            nesting -= 1
+
+    print("tast1:{}; task2:{}".format(score, garbage_score))
+
+# DAY 10 -----------------------------------------------------------------
+# TBD
 
 def main():
-    last_solved = 8
+    last_solved = 9
     txt = """
       __   ____  _  _  ____  __ _  ____       ____   __    __  ____ 
      / _\ (    \/ )( \(  __)(  ( \(_  _)     (___ \ /  \  /  \(__  )
@@ -457,6 +487,8 @@ def main():
             advent7(data)
         elif num == 8:
             advent8(data)
+        elif num == 9:
+            advent9(data)
 
 if __name__ == "__main__":
     main()
