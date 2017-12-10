@@ -431,10 +431,64 @@ def advent9(data):
     print("tast1:{}; task2:{}".format(score, garbage_score))
 
 # DAY 10 -----------------------------------------------------------------
-# TBD
+
+def reverse_sub(lst, pos, cnt):
+    lst2 = lst[:]
+    pos2 = (pos+cnt-1)%len(lst)
+    for i in range(cnt):
+        lst[(pos+i)%len(lst)] = lst2[(pos2-i)%len(lst)]
+
+        
+def advent10(data):
+    seq = list(map(int, data.split(',')))
+    
+    lst = list(range(256))
+    pos = 0
+    skip = 0
+    for length in seq:
+        if length > len(lst):
+            continue
+        reverse_sub(lst, pos, length)
+        pos = (pos+length+skip)%len(lst)
+        skip += 1
+
+    result1 = lst[0]*lst[1]
+
+    #TASK 2---------------------------------------
+    seq = list(data.encode('ascii'))
+    seq.extend([17,31,73,47,23])
+    lst = list(range(256))
+    pos = 0
+    skip = 0
+    for i in range(64):
+        for length in seq:
+            if length > len(lst):
+                continue
+            reverse_sub(lst, pos, length)
+            pos = (pos+length+skip)%len(lst)
+            skip += 1
+
+    dense = []
+    hush = ""
+    for i in range(16):
+        dense_part = 0
+        for n in range(16):
+            dense_part = dense_part ^ lst[i*16+n]
+        dense.append(dense_part)
+        hush_add = hex(dense_part)[2:]
+        if len(hush_add) < 2:
+            hush_add = '0'+hush_add
+        hush += hush_add
+        
+
+    print("tast1:{}; task2:{}".format(result1, hush))
+
+# DAY 11 ---------------------------------------------------------
+# TBD
+    
 
 def main():
-    last_solved = 9
+    last_solved = 10
     txt = """
       __   ____  _  _  ____  __ _  ____       ____   __    __  ____ 
      / _\ (    \/ )( \(  __)(  ( \(_  _)     (___ \ /  \  /  \(__  )
@@ -489,6 +543,8 @@ def main():
             advent8(data)
         elif num == 9:
             advent9(data)
+        elif num == 10:
+            advent10(data)
 
 if __name__ == "__main__":
     main()
