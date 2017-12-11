@@ -481,14 +481,43 @@ def advent10(data):
         hush += hush_add
         
 
-    print("tast1:{}; task2:{}".format(result1, hush))
+    print("task1:{}; task2:{}".format(result1, hush))
 
 # DAY 11 ---------------------------------------------------------
-# TBD
-    
+def advent11(data):
+    dir_list = data.split(',')
+    position = [0,0,0]  # honeycomb, needs 3 dimensions to easily address them
+    max_steps = 0
+    for direction in dir_list:
+        if direction == "n":
+            position[1] += 1
+            position[2] += 1
+        elif direction == "s":
+            position[1] -= 1
+            position[2] -= 1
+        elif direction == "nw":
+            position[0] -= 1
+            position[1] += 1
+        elif direction == "se":
+            position[0] += 1
+            position[1] -= 1
+        elif direction == "ne":
+            position[0] += 1
+            position[2] += 1
+        elif direction == "sw":
+            position[0] -= 1
+            position[2] -= 1
+        total = abs(position[0]) + abs(position[1]) + abs(position[2])
+        steps = total//2
+        if steps > max_steps:
+            max_steps = steps
+
+    total = abs(position[0]) + abs(position[1]) + abs(position[2])
+    steps = total//2
+    print("task1:{}; task2:{}".format(steps, max_steps))
 
 def main():
-    last_solved = 10
+    last_solved = 11
     txt = """
       __   ____  _  _  ____  __ _  ____       ____   __    __  ____ 
      / _\ (    \/ )( \(  __)(  ( \(_  _)     (___ \ /  \  /  \(__  )
@@ -545,6 +574,8 @@ def main():
             advent9(data)
         elif num == 10:
             advent10(data)
+        elif num == 11:
+            advent11(data)
 
 if __name__ == "__main__":
     main()
