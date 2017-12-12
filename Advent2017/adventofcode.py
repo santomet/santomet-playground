@@ -516,8 +516,55 @@ def advent11(data):
     steps = total//2
     print("task1:{}; task2:{}".format(steps, max_steps))
 
+# DAY 12 ----------------------------------------------------------
+def advent12(data):
+    line_list = data.split('\n')
+    isets = [{0}]
+    root = None
+    for line in line_list:
+        str_list = line.split()
+        left_num = int(str_list[0])
+        right_nums = str_list[2:]  # strip
+        right_nums = "".join(right_nums)  # get together
+        right_nums = list(map(int, right_nums.split(',')))  # remove colons and map to ints
+
+        interconnected = set([left_num] + right_nums)
+        found = False
+        for i in range(len(isets)):
+            if len(interconnected & isets[i]) > 0:
+                isets[i] = isets[i] | interconnected
+                found = True
+        if not found:
+            isets.append(interconnected)
+
+        # finally, reduce the list
+        for s in isets[1:]:
+            if len(s & isets[0]) > 0:
+                isets[0] = isets[0] | s
+                isets = list(filter((s).__ne__, isets))
+
+    # Ugly ugly ugly, but the first thing that came on my mind. Basically
+    # looking for non-empty intersections, then join them and start from the beginning
+    changed = True
+    while changed:
+        changed = False
+        for i in range(len(isets)):
+            for s in isets[:i:]:
+                if len(s & isets[i]) > 0:
+                    isets[i] = isets[i] | s
+                    isets = list(filter((s).__ne__, isets))
+                    changed = True
+                    break
+            if changed:
+                break
+    
+    print("task1:{}; task2:{}".format(len(isets[0]), len(isets)))
+
+# DAY 13 ---------------------------------------------------------------
+# TBD
+
 def main():
-    last_solved = 11
+    last_solved = 12
     txt = """
       __   ____  _  _  ____  __ _  ____       ____   __    __  ____ 
      / _\ (    \/ )( \(  __)(  ( \(_  _)     (___ \ /  \  /  \(__  )
@@ -576,6 +623,8 @@ def main():
             advent10(data)
         elif num == 11:
             advent11(data)
+        elif num == 12:
+            advent12(data)
 
 if __name__ == "__main__":
     main()
