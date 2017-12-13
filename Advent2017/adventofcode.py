@@ -586,7 +586,26 @@ def advent13(data):
         #print("it{}pos{}pic{}sev{}".format(i, position, picosecond, severity))
         picosecond += 1
 
-    print("task1:{}; task2:{}".format(severity, 0))
+    # second task, too lazy, just copy the code and bruteforce it :P
+    picosecond_start = 0
+    while True:
+        picosecond = picosecond_start
+        caught = False
+        for i in range(top_layer+1):
+            if i not in layers.keys():
+                picosecond += 1
+                continue
+            position = picosecond%layers[i][1]
+            if position == 0:
+                caught = True
+                break
+            #print("it{}pos{}pic{}sev{}".format(i, position, picosecond, severity))
+            picosecond += 1
+        if not caught:
+            break
+        picosecond_start += 1
+
+    print("task1:{}; task2:{}".format(severity, picosecond_start))
         
 
 def main():
