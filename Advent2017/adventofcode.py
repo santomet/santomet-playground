@@ -543,20 +543,28 @@ def advent12(data):
                 isets[0] = isets[0] | s
                 isets = list(filter((s).__ne__, isets))
 
-    # Ugly ugly ugly, but the first thing that came on my mind. Basically
-    # looking for non-empty intersections, then join them and start from the beginning
-    changed = True
-    while changed:
+    # Ugly ugly ugly, but finally works correctly!!
+    i = 1
+    while True:
         changed = False
-        for i in range(len(isets)):
-            for s in isets[:i:]:
-                if len(s & isets[i]) > 0:
-                    isets[i] = isets[i] | s
-                    isets = list(filter((s).__ne__, isets))
-                    changed = True
-                    break
-            if changed:
+        if i >= len(isets):
+            break
+        j = 1
+        while True:
+            n = j+1
+            if n == i:
+                j += 1
+                continue
+            if n >= len(isets):
                 break
+            if len(isets[n] & isets[i]) > 0:
+                isets[i] = isets[i] | isets[n]
+                isets = isets[:n] + isets[(n+1):]
+                if n <= i:
+                    i -= 1
+            else:
+                j += 1
+        i += 1
     
     print("task1:{}; task2:{}".format(len(isets[0]), len(isets)))
 
@@ -606,6 +614,9 @@ def advent13(data):
         picosecond_start += 1
 
     print("task1:{}; task2:{}".format(severity, picosecond_start))
+
+# DAY 14 --------------------------------------------------------------------------
+
         
 
 def main():
