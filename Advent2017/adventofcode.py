@@ -561,10 +561,36 @@ def advent12(data):
     print("task1:{}; task2:{}".format(len(isets[0]), len(isets)))
 
 # DAY 13 ---------------------------------------------------------------
-# TBD
+def advent13(data):
+    lines = data.split('\n')
+    layers = {}
+    for line in lines:
+        depth_range = line.split(": ")
+        depth = int(depth_range[0])
+        rang = int(depth_range[1])
+
+        rang_mod = (rang-1)*2
+        
+        layers[depth] = [rang, rang_mod]
+
+    top_layer = max(layers.keys())
+    picosecond = 0
+    severity = 0
+    for i in range(top_layer+1):
+        if i not in layers.keys():
+            picosecond += 1
+            continue
+        position = picosecond%layers[i][1]
+        if position == 0:
+            severity += i*layers[i][0]
+        #print("it{}pos{}pic{}sev{}".format(i, position, picosecond, severity))
+        picosecond += 1
+
+    print("task1:{}; task2:{}".format(severity, 0))
+        
 
 def main():
-    last_solved = 12
+    last_solved = 13
     txt = """
       __   ____  _  _  ____  __ _  ____       ____   __    __  ____ 
      / _\ (    \/ )( \(  __)(  ( \(_  _)     (___ \ /  \  /  \(__  )
@@ -625,6 +651,8 @@ def main():
             advent11(data)
         elif num == 12:
             advent12(data)
+        elif num == 13:
+            advent13(data)
 
 if __name__ == "__main__":
     main()
