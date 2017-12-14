@@ -438,23 +438,8 @@ def reverse_sub(lst, pos, cnt):
     for i in range(cnt):
         lst[(pos+i)%len(lst)] = lst2[(pos2-i)%len(lst)]
 
-        
-def advent10(data):
-    seq = list(map(int, data.split(',')))
-    
-    lst = list(range(256))
-    pos = 0
-    skip = 0
-    for length in seq:
-        if length > len(lst):
-            continue
-        reverse_sub(lst, pos, length)
-        pos = (pos+length+skip)%len(lst)
-        skip += 1
-
-    result1 = lst[0]*lst[1]
-
-    #TASK 2---------------------------------------
+# Used also in day 14
+def knot_hash(data):
     seq = list(data.encode('ascii'))
     seq.extend([17,31,73,47,23])
     lst = list(range(256))
@@ -479,9 +464,26 @@ def advent10(data):
         if len(hush_add) < 2:
             hush_add = '0'+hush_add
         hush += hush_add
+    return hush
+
+        
+def advent10(data):
+    seq = list(map(int, data.split(',')))
+    
+    lst = list(range(256))
+    pos = 0
+    skip = 0
+    for length in seq:
+        if length > len(lst):
+            continue
+        reverse_sub(lst, pos, length)
+        pos = (pos+length+skip)%len(lst)
+        skip += 1
+
+    result1 = lst[0]*lst[1]
         
 
-    print("task1:{}; task2:{}".format(result1, hush))
+    print("task1:{}; task2:{}".format(result1, knot_hash(data)))
 
 # DAY 11 ---------------------------------------------------------
 def advent11(data):
@@ -616,11 +618,52 @@ def advent13(data):
     print("task1:{}; task2:{}".format(severity, picosecond_start))
 
 # DAY 14 --------------------------------------------------------------------------
+def print_grid(rows):
+    for i in range(128):
+        for n in range(128):
+            if rows[i][n] == 1:
+                print(chr(9632), end = '')
+            elif rows[i][n] == 0:
+                print(chr(9633), end = '')
+            elif rows[i][n] == 2:
+                print(chr(9652), end = '')
+        print()
+    print()
 
+def regionify(rows, coord):
+    if coord[0] < 0 or coord[0] > 127 or coord[1] < 0 or coord[1] > 127:
+        return
+    if rows[coord[0]][coord[1]] == 1:
+        rows[coord[0]][coord[1]] = 2  # mark as found
+        regionify(rows, [coord[0]-1, coord[1]])
+        regionify(rows, [coord[0], coord[1]-1])
+        regionify(rows, [coord[0]+1, coord[1]])
+        regionify(rows, [coord[0], coord[1]+1])
+
+def advent14(data):
+    rows = []
+    ones = 0
+    regions = 0
+    for i in range(128):
+        hush = knot_hash(data + "-" + str(i))
+        integer = int(hush,16)
+        binary = list(map(int, bin(integer)[2:]))
+        binary = [0]*(128-len(binary)) + binary
+        rows.append(binary)
+        ones += (binary.count(1))
+
+    # print_grid(rows)  #debug
         
+    for i in range(128):
+        for n in range(128):
+            if rows[i][n] == 1:
+                regions += 1
+                regionify(rows, [i, n])
+
+    print("task1:{}; task2:{}".format(ones, regions))   
 
 def main():
-    last_solved = 13
+    last_solved = 14
     txt = """
       __   ____  _  _  ____  __ _  ____       ____   __    __  ____ 
      / _\ (    \/ )( \(  __)(  ( \(_  _)     (___ \ /  \  /  \(__  )
@@ -683,6 +726,8 @@ def main():
             advent12(data)
         elif num == 13:
             advent13(data)
+        elif num == 14:
+            advent14(data)
 
 if __name__ == "__main__":
     main()
