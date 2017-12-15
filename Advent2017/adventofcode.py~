@@ -652,7 +652,7 @@ def advent14(data):
         rows.append(binary)
         ones += (binary.count(1))
 
-    # print_grid(rows)  #debug
+    print_grid(rows)  #debug
         
     for i in range(128):
         for n in range(128):
@@ -660,62 +660,10 @@ def advent14(data):
                 regions += 1
                 regionify(rows, [i, n])
 
-    print("task1:{}; task2:{}".format(ones, regions))
-
-# DAY 15 ---------------------------------------------------------
-def advent15(data):
-    info_lines = data.split('\n')
-    gen_A_start = 0
-    gen_B_start = 0
-    for info in info_lines:
-        info = info.split()
-        if info[1] == 'A':
-            gen_A_start = int(info[4])
-        elif info[1] == 'B':
-            gen_B_start = int(info[4])
-
-    count = 0
-    count_2 = 0
-    gena = gen_A_start
-    gena_2 = gen_A_start
-    genb = gen_B_start
-    genb_2 = gen_B_start
-    genam = 16807
-    genbm = 48271
-    mod = 2147483647
-    
-    cycles = 40000000  # 40 millions :D
-    for i in range(cycles):
-        gena = (gena*genam)%mod         
-        genb = (genb*genbm)%mod
-        gena_bin_16 = gena%65536  # cut last 16 bits: 65536 is lowest number with 17b
-        genb_bin_16 = genb%65536
-        if gena_bin_16 == genb_bin_16:
-            count += 1
-
-    # doesn't make sense to have it in the same cycle... python is already too slow for this
-    cycles = 5000000
-    for i in range(cycles):
-        gena_2 = (gena_2*genam)%mod
-        while not gena_2%4 == 0:
-            gena_2 = (gena_2*genam)%mod
-
-        genb_2 = (genb_2*genbm)%mod
-        while not genb_2%8 == 0:
-            genb_2 = (genb_2*genbm)%mod
-
-        gena_2_bin_16 = gena_2%65536
-        genb_2_bin_16 = genb_2%65536
-
-        if gena_2_bin_16 == genb_2_bin_16:
-            count_2 += 1
-
-            
-    print("task1:{}; task2:{}".format(count, count_2))
-    
+    print("task1:{}; task2:{}".format(ones, regions))   
 
 def main():
-    last_solved = 15
+    last_solved = 14
     txt = """
       __   ____  _  _  ____  __ _  ____       ____   __    __  ____ 
      / _\ (    \/ )( \(  __)(  ( \(_  _)     (___ \ /  \  /  \(__  )
@@ -780,8 +728,6 @@ def main():
             advent13(data)
         elif num == 14:
             advent14(data)
-        elif num == 15:
-            advent15(data)
 
 if __name__ == "__main__":
     main()
