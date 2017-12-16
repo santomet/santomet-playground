@@ -712,10 +712,52 @@ def advent15(data):
 
             
     print("task1:{}; task2:{}".format(count, count_2))
-    
+
+# DAY 16 -----------------------------------------------------------------
+
+def advent16(data):
+    programs = []
+    letter = 'a'
+    for i in range(16):
+        programs.append(letter)
+        letter = chr(ord(letter) + 1)
+
+    oldprograms = programs[:]
+    data = data.split(',')
+    i = 1
+    while i <= 1000000000:
+        for move in data:
+            instr = list(move)[0]
+            if instr == 's':
+                a = int(move[1:])
+                programs = programs[(-a):] + programs[:(15-a+1)]          
+            elif instr == 'x':
+                positions = move[1:].split('/')
+                l1_pos = int(positions[0])
+                l2_pos = int(positions[1])
+                l1 = programs[l1_pos]
+                l2 = programs[l2_pos]
+                programs[l1_pos] = l2
+                programs[l2_pos] = l1
+            elif instr == 'p':
+                letters = move[1:].split('/')
+                l1_pos = programs.index(letters[0])
+                l2_pos = programs.index(letters[1])
+                l1 = programs[l1_pos]
+                l2 = programs[l2_pos]
+                programs[l1_pos] = l2
+                programs[l2_pos] = l1
+        if i == 1:
+            firsttask = programs[:]
+        if programs == oldprograms:
+            i = i*int(1000000000/i)
+
+        i+= 1
+
+    print("task1:{}; task2:{}".format("".join(firsttask), "".join(programs)))
 
 def main():
-    last_solved = 15
+    last_solved = 16
     txt = """
       __   ____  _  _  ____  __ _  ____       ____   __    __  ____ 
      / _\ (    \/ )( \(  __)(  ( \(_  _)     (___ \ /  \  /  \(__  )
@@ -782,6 +824,8 @@ def main():
             advent14(data)
         elif num == 15:
             advent15(data)
+        elif num == 16:
+            advent16(data)
 
 if __name__ == "__main__":
     main()
