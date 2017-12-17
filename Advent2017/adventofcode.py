@@ -756,8 +756,38 @@ def advent16(data):
 
     print("task1:{}; task2:{}".format("".join(firsttask), "".join(programs)))
 
+# DAY 17 ------------------------------------------------------
+
+def advent17(data):
+    steps = int(data)
+    lst = [0]
+    pos = 0
+    firsttask = 0
+    for i in range(1, 2018):
+        pos = (pos+steps)%(len(lst)) + 1
+        # print("insert {} at pos {}".format(i,pos))
+        lst.insert(pos, i)
+        if i == 2017:
+            firsttask = lst[pos+1]
+
+    lst = [0]
+    length = 1
+    
+    # we don't have to keep the whole list, because zero is always on index 0
+    for i in range(1, 50000001):
+        pos = (pos+steps)%(length) + 1
+        length += 1
+        if pos > steps:
+            continue
+        # print("insert {} at pos {}".format(i,pos))
+        lst.insert(pos, i)
+            
+    
+    print("task1:{}; task2:{}".format(firsttask, lst[1]))
+    
+
 def main():
-    last_solved = 16
+    last_solved = 17
     txt = """
       __   ____  _  _  ____  __ _  ____       ____   __    __  ____ 
      / _\ (    \/ )( \(  __)(  ( \(_  _)     (___ \ /  \  /  \(__  )
@@ -826,6 +856,8 @@ def main():
             advent15(data)
         elif num == 16:
             advent16(data)
+        elif num == 17:
+            advent17(data)
 
 if __name__ == "__main__":
     main()
