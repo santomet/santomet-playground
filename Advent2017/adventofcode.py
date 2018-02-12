@@ -1,5 +1,6 @@
 import math
 from operator import itemgetter
+from collections import deque
 
 # DAY 1 -------------------------------------------------------------
 def advent1(data):
@@ -784,10 +785,308 @@ def advent17(data):
             
     
     print("task1:{}; task2:{}".format(firsttask, lst[1]))
+
+# DAY 18 -------------------------------------------------------------
+# i hate this one
+
+def duet(lines, registers, pos, task2 = False, sndq = [], rcvq = [], sndcnt = [0], prog = 0):
+    last_frequency_played = -1
+    while True:
+        if pos[0] >= len(lines) or pos[0] < 0:
+            return -1
+        instr = lines[pos[0]].split()
+        first = instr[1]
+        second = None
+        if len(instr) == 3:
+            second = instr[2]
+        
+        firstisreg = False
+        if first >= 'a' and first <= 'z':
+            firstisreg = True
+            if first not in registers:
+                registers[first] = 0
+        else:
+            first = int(first)
+
+        secondisreg = False
+        if second is not None and second >= 'a' and second <= 'z':
+            secondisreg = True
+            if second not in registers:
+                registers[second] = 0
+        elif second is not None:
+            second = int(second)
+        
+        jmp = False
+
+
+        if instr[0] == "snd":
+            if firstisreg:
+                last_frequency_played = registers[first]
+                sndq.append(registers[first])
+            else:
+                last_frequency_played = first
+                sndq.append(first)
+            sndcnt[0] += 1
+
+        elif instr[0] == "set":
+            if firstisreg:
+                if secondisreg:
+                    registers[first] = registers[second]
+                else:
+                    registers[first] = second
+
+            else:
+                print("ERROR in SET")    
+
+        elif instr[0] == "add":
+            if firstisreg:
+                if secondisreg:
+                    registers[first] += registers[second]
+                else:
+                    registers[first] += second
+            else:
+                print("ERROR in ADD")
+
+        elif instr[0] == "mul":
+            if firstisreg:
+                if secondisreg:
+                    registers[first] *= registers[second]
+                else:
+                    registers[first] *= second
+            else:
+                print("ERROR in MUL")
+    
+        elif instr[0] == "mod":
+            if firstisreg:
+                if secondisreg:
+                    if not registers[second] == 0:
+                        registers[first] = registers[first] % registers[second]
+                else:
+                    if not second == 0:
+                        registers[first] = registers[first] % second
+            else:
+                print("ERROR in MOD")
+
+        elif instr[0] == "rcv":
+            if firstisreg:
+                if not task2:
+                    if not registers[first] == 0:
+                        return last_frequency_played
+                else:
+                    if len(rcvq) > 0:
+                        registers[first] = rcvq.popleft()
+                    else:
+                        return 0
+                
+            else:
+                print("ERROR in RCV")
+                if not task2:
+                    if not first == 0:
+                        return last_frequency_played
+
+        elif instr[0] == "jgz":
+            if (firstisreg and registers[first] > 0) or (not firstisreg and first > 0):
+                if secondisreg:
+                    pos[0] += registers[second]
+                else:
+                    pos[0] += second
+                jmp = True
+
+        if not jmp:
+            pos[0] += 1
+
+def advent18(data):
+    lines = data.split('\n')
+
+    registers = {}
+    firsttask = duet(lines, registers, [0])
+
+    registers0 = {}
+    registers1 = {}
+    registers1['p'] = 1
+    p0q = deque([])
+    p1q = deque([])
+    pos0 = [0]
+    pos1 = [0]
+    send0 = [0]
+    secondtask = [0]
+    
+    while True:
+        rv0 = duet(lines, registers0, pos0, True, p0q, p1q, send0, 0)
+        rv1 = duet(lines, registers1, pos1, True, p1q, p0q, secondtask, 1)
+        afterfirstrun = True
+        if not rv0 == 0 or not rv1 == 0:
+            break
+        if len(p1q) < 1 and len(p0q) < 1:
+            break
+
+    
     
 
+    print("task1:{}; task2:{}".format(firsttask, secondtask[0]))
+                
+                    
+
+# DAY 19 -------------------------------------------------------------
+# i know i'm not checking if i'm out of index... too lazy
+def new_direction(rows, x, y, character):
+    if character == '|':  # left or right
+        ch = rows[y][x-1]
+        if ch == '-' or (ch >= 'A' and ch <= 'Z'):
+            return [-1, 0, '-']
+        ch = rows[y][x+1]
+        if ch == '-' or (ch >= 'A' and ch <= 'Z'):
+            return [1, 0, '-']
+
+        return [0,0,'F']
+
+    if character == '-':
+        ch = rows[y-1][x]
+        if ch == '|' or (ch >= 'A' and ch <= 'Z'):
+            return [0, -1, '|']
+        ch = rows[y+1][x]
+        if ch == '|' or (ch >= 'A' and ch <= 'Z'):
+            return [0, 1, '|']
+        
+        return [0,0,'F']
+
+def advent19(data):
+    rows = data.split('\n')
+    letters = []
+    steps = 1
+    for i in range(len(rows)):  # listize
+        rows[i] = list(rows[i])
+        
+    direction = [0, 1, '|']  # x difference, y difference, line
+    x = 0
+    y = 0
+    # find the starting point
+    for i in range(len(rows[0])):
+        if rows[0][i] == '|':
+            x = i
+            break
+
+    while True:  # these could be shorter, but i would check some things two times in that case
+        # one step
+        let = rows[y+direction[1]][x+direction[0]]
+        if let >= 'A' and let <= 'Z':
+            letters.append(let)
+            x += direction[0]
+            y += direction[1]
+            steps += 1
+            continue
+    
+        if let == direction[2]:
+            x += direction[0]
+            y += direction[1]
+            steps += 1
+            continue
+        if let == '+':
+            x += direction[0]
+            y += direction[1]
+            steps += 1
+            direction = new_direction(rows, x, y, direction[2])
+            if direction[2] == 'F':
+                break
+            continue
+        # two steps
+        let = rows[y+2*direction[1]][x+2*direction[0]]
+        if let >= 'A' and let <= 'Z':
+            letters.append(let)
+            x += 2*direction[0]
+            y += 2*direction[1]
+            steps += 2
+            continue
+
+        if let == direction[2]:    
+            x += 2*direction[0]
+            y += 2*direction[1]
+            steps += 2
+            continue
+        if let == '+':
+            x += 2*direction[0]
+            y += 2*direction[1]
+            steps += 2
+            direction = new_direction(rows, x, y, direction[2])
+            if direction[2] == 'F':
+                break
+            continue
+
+        break
+
+    
+    print("task1:{}; task2:{}".format("".join(letters), steps))
+
+# DAY 20 -----------------------------------------------------------------------------
+
+def advent20(data):
+    particles_str = data.split('\n')
+    particles = []
+    count = 0
+
+    for particle_str in particles_str:
+        pva = particle_str.split(", ")
+        particle = []
+        for val in pva:
+            particle.append(list(map(int, val[3:-1].split(','))))
+
+        particle[0].append(True)  # indication that particle is still alive
+        particles.append(particle)
+        count += 1
+
+
+
+    collparticles = particles[:]
+
+    for i in range(1000):
+        for particle in particles:
+            for i in range(3):
+                particle[1][i] += particle[2][i]
+                particle[0][i] += particle[1][i]
+
+    mindist = None
+    minpart = None
+    for i in range(len(particles)):
+        dist = abs(particles[i][0][0]) + abs(particles[i][0][1]) + abs(particles[i][0][2])
+        if mindist is None:
+            mindist = dist
+            minpart = i
+        else:
+            if mindist > dist:
+                mindist = dist
+                minpart = i
+
+
+    positions = {}
+    for i in range(1000):
+        for particle in collparticles:
+
+            if not particle[0][3]:  # if collided
+                continue
+            
+            for i in range(3):
+                particle[1][i] += particle[2][i]
+                particle[0][i] += particle[1][i]
+
+            if (particle[0][0], particle[0][1], particle[0][2]) in positions.keys():  # particles on particular positions
+                positions[(particle[0][0], particle[0][1], particle[0][2])].append(particle)
+            else:
+                positions[(particle[0][0], particle[0][1], particle[0][2])] = [particle]
+
+        for key in positions.keys():  # search for collisions
+            parlist = positions[key]
+            if len(parlist) > 1:
+                for particle in parlist:
+                    particle[0][3] = False
+                    count -= 1
+                    parlist.remove(particle)
+        
+            
+
+    print("task1:{}; task2:{}".format(minpart, count))
+
 def main():
-    last_solved = 17
+    last_solved = 20
     txt = """
       __   ____  _  _  ____  __ _  ____       ____   __    __  ____ 
      / _\ (    \/ )( \(  __)(  ( \(_  _)     (___ \ /  \  /  \(__  )
@@ -858,6 +1157,12 @@ def main():
             advent16(data)
         elif num == 17:
             advent17(data)
+        elif num == 18:
+            advent18(data)
+        elif num == 19:
+            advent19(data)
+        elif num == 20:
+            advent20(data)
 
 if __name__ == "__main__":
     main()
