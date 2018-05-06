@@ -1,6 +1,9 @@
 # rtvs2vlc
 Video streamy z rtvs je pohodlné prehrávať mimo prehliadač. Našťastie nie sú nijako extra chránené, no už ma unavovalo robiť tú istú činnosť pri každom športe dookola. Tak som si napísal malý skript:
 
+### Požiadavky
+Python3 a schopnejší prehrávač
+
 ### Ako na to?
 Najjednoduchšie použitie pre linux userov v prípade kanálu STV 1: 
 ```sh
