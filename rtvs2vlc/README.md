@@ -13,7 +13,7 @@ Po spustení samotného skriptu s inými (alebo žiadnymi) argumentmi sa spustí
 
 
 ## PHP verzia
-Stačí nahrať sa (slovenský) php server a do prehrávača rovno zadať adresu napr:
+Stačí nahrať skript na php server so slovenskou IP
 ```
 http://santomet.php5.sk/rtvs2vlc.php?c=1
 ```
