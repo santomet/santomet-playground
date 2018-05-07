@@ -18,7 +18,7 @@ Stačí nahrať sa (slovenský) php server a do prehrávača rovno zadať adresu
 http://santomet.php5.sk/rtvs2vlc.php?c=1
 ```
 Opäť, v tomto prípade pre kanál STV1. Php skript je na danej adrese nahraný, avšak php5.sk sa hosťuje v česku, takže geolokáciu neoklameme :(
-Bohužiaľ som totiž nenašiel schopný na slovensku hosťovaný php free hosting (a už vôbec nie php). Ak by ste o niečom vedeli, dajte vedieť!
+Bohužiaľ som totiž nenašiel schopný na slovensku hosťovaný php free hosting (a už vôbec nie python). Ak by ste o niečom vedeli, napísať!
 
 ### Poznámky
 
