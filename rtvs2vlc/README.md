@@ -1,11 +1,11 @@
 # rtvs2vlc
 Video streamy z rtvs je pohodlné prehrávať mimo prehliadač. Našťastie nie sú nijako extra chránené, no už ma unavovalo robiť tú istú činnosť pri každom športe dookola. Tak som si napísal malý skript.
 ## Rýchly prístup cez VLC
-[stv1](http://santomet.studenthosting.sk/rtvs2vlc.php?c=1&r=true)
+[stv1](vlc://http://santomet.studenthosting.sk/rtvs2vlc.php?c=1&r=true)
 
-[stv2](http://santomet.studenthosting.sk/rtvs2vlc.php?c=2&r=true)
+[stv2](vlc://http://santomet.studenthosting.sk/rtvs2vlc.php?c=2&r=true)
 
-[STV online](http://santomet.studenthosting.sk/rtvs2vlc.php?c=4&r=true)
+[STV online](vlc://http://santomet.studenthosting.sk/rtvs2vlc.php?c=4&r=true)
 
 ## PHP verzia
 Stačí nahrať skript na php server so slovenskou IP. Kým mi to nezrušia, príklad je na následujúcej adrese. Tú stačí zadať do prehrávača:
