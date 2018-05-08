@@ -53,6 +53,6 @@ $finalurl = $url_base . $lines[5];
 if ($redirect)
     redirect($finalurl);
 else
-    echo $url_base . $lines[5];
+    echo $finalurl;
 
 ?>
