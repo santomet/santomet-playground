@@ -6,17 +6,17 @@ Stačí nahrať skript na php server so slovenskou IP. Kým mi to nezrušia, pr�
 ```
 http://santomet.studenthosting.sk/rtvs2vlc.php?c=1&r=true
 ```
-  - c je číslo kanála
+  - c je číslo kanála. STV1 je n čísle 1. Taktiež môžeš použiť číslo relácie z archívu (posledná časť adresy)
   - r volí, že sa má adresa presmerovať kódom 303. Ináč sa adresa na playlist len vypíše (oba spôsoby by mali fungovať vo VLC)
 
 
 ## Python verzia
 Potrebuješ python3.
-Najjednoduchšie použitie pre linux userov v prípade kanálu STV 1: 
+Najjednoduchšie použitie pre linux userov: 
 ```sh
 $ vlc `./rtvs2vlc.py 1`
 ```
-V prípade ostatných kanálov opäť vymeniť 1 za príslúšné číslo.
+V prípade ostatných kanálov vymeniť 1 za príslúšné číslo.
 
 Po spustení samotného skriptu s inými (alebo žiadnymi) argumentmi sa spustí jenoduchý interface, použitie je jasné.
 

@@ -20,6 +20,10 @@ if (isset($_GET["r"]) and htmlspecialchars($_GET["r"]) == "true")
 
 $url = "http://www.rtvs.sk/json/live5.json?c=" . $channel . "&b=chrome&p=linux&v=64&f=0&d=1";
 
+if ((int)$channel > 6)
+    $url = "http://www.rtvs.sk/json/archive5.json?id=" . $channel . "&b=chrome&p=linux&v=64&f=0&d=1";
+
+
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
