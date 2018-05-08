@@ -1,6 +1,6 @@
 # rtvs2vlc
-Video streamy z rtvs je pohodlné prehrávať mimo prehliadač. Našťastie nie sú nijako extra chránené, no už ma unavovalo robiť tú istú činnosť pri každom športe dookola. Tak som si napísal malý skript.
-## Rýchly prístup: (skopírovať link a vložiť do prehrávača. Na Androide s nainštalovaným MX Playerom stačí ak kliknúť)
+Video streamy je pohodlné prehrávať mimo prehliadač. Našťastie, na RTVS nie sú nijako extra chránené. Tento skript však prácu zjednodušuje. Taktiež ak sa hosťuje na zariadení so slovenskou IP, môže obísť geoblocking.
+## Rýchly prístup: (skopírovať link a vložiť do prehrávača. Na Androide s nainštalovaným MX Playerom stačí aj kliknúť)
 [STV 1](http://santomet.studenthosting.sk/rtvs2vlc.php?c=1&r=true)
 
 [STV 2](http://santomet.studenthosting.sk/rtvs2vlc.php?c=2&r=true)
