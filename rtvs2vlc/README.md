@@ -4,7 +4,7 @@ Video streamy z rtvs je pohodlné prehrávať mimo prehliadač. Našťastie nie 
 ## PHP verzia
 Stačí nahrať skript na php server so slovenskou IP. Kým mi to nezrušia, príklad je na následujúcej adrese. Tú stačí zadať do prehrávača:
 ```
-http://santomet.studenthosting.sk/rtvs2vlc.php?c=1?r=true
+http://santomet.studenthosting.sk/rtvs2vlc.php?c=1&r=true
 ```
   - c je číslo kanála
   - r volí, že sa má adresa presmerovať kódom 303. Ináč sa adresa na playlist len vypíše (oba spôsoby by mali fungovať vo VLC)
