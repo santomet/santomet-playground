@@ -2,7 +2,9 @@
 Video streamy z rtvs je pohodlné prehrávať mimo prehliadač. Našťastie nie sú nijako extra chránené, no už ma unavovalo robiť tú istú činnosť pri každom športe dookola. Tak som si napísal malý skript.
 ## Rýchly prístup cez VLC
 [stv1](vlc://http://santomet.studenthosting.sk/rtvs2vlc.php?c=1&r=true)
+
 [stv2](vlc://http://santomet.studenthosting.sk/rtvs2vlc.php?c=2&r=true)
+
 [STV online](vlc://http://santomet.studenthosting.sk/rtvs2vlc.php?c=4&r=true)
 
 ## PHP verzia
