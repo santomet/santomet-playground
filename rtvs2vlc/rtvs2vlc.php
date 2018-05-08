@@ -1,7 +1,24 @@
 <?php
 #echo 'Hello ' . htmlspecialchars($_GET["name"]) . '!';
 #htmlspecialchars($_GET["c"])
-$url = "http://www.rtvs.sk/json/live5.json?c=" . htmlspecialchars($_GET["c"]) . "&b=chrome&p=linux&v=64&f=0&d=1";
+
+function redirect($url, $statusCode = 303)
+{
+   header('Location: ' . $url, true, $statusCode);
+   die();
+}
+
+
+$channel = "1";
+$redirect = false;
+
+if (isset($_GET["c"]))
+    $channel = htmlspecialchars($_GET["c"]);
+
+if (isset($_GET["r"]) and htmlspecialchars($_GET["r"]) == "true")
+    $redirect = true;
+
+$url = "http://www.rtvs.sk/json/live5.json?c=" . $channel . "&b=chrome&p=linux&v=64&f=0&d=1";
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, $url);
@@ -31,6 +48,11 @@ $response = curl_exec($ch);
 
 $lines = explode("\n", $response);
 
-echo $url_base . $lines[5];
+$finalurl = $url_base . $lines[5];
+
+if ($redirect)
+    redirect($finalurl);
+else
+    echo $url_base . $lines[5];
 
 ?>
