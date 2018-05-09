@@ -1,11 +1,14 @@
 # rtvs2vlc
 Video streamy je pohodlné prehrávať mimo prehliadač. Našťastie, na RTVS nie sú nijako extra chránené. Tento skript však prácu zjednodušuje. Taktiež ak sa hosťuje na zariadení so slovenskou IP, môže obísť geoblocking.
-## Rýchly prístup: (skopírovať link a vložiť do prehrávača. Na Androide s nainštalovaným MX Playerom stačí aj kliknúť)
+## Rýchly prístup: (skopírovať link a vložiť do prehrávača)
 [STV 1](http://santomet.studenthosting.sk/rtvs2vlc.php?c=1&r=true)
 
 [STV 2](http://santomet.studenthosting.sk/rtvs2vlc.php?c=2&r=true)
 
 [STV online](http://santomet.studenthosting.sk/rtvs2vlc.php?c=4&r=true)
+
+
+[Archív: Slovensko - Švajčiarsko](http://santomet.studenthosting.sk/rtvs2vlc.php?c=155614&r=true)
 
 ## PHP verzia
 Stačí nahrať skript na php server so slovenskou IP. Kým mi to nezrušia, príklad je na následujúcej adrese. Tú stačí zadať do prehrávača:
