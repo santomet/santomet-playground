@@ -1,5 +1,5 @@
 # RTVS2VLC
-Skripty sprístupňujú sledovanie živých kanálov a archívu RTVS v externom prehrávači podporujúcom m3u8 playlisty. Taktiež ak sa hosťujú na zariadení so slovenskou IP, môžu obísť geoblocking, pretože výsledná adresa playlistu už lokáciu neoveruje. Skript je v dvoch verziách - pôvodný python, ktorý je len proof of concept a môže byť dlhodobo užitočný ak geoblocking nie je problém a php, ktorý bol vytvorený špeciálne na použitie na nejakom slovenskom free hostingu.
+Skripty sprístupňujú sledovanie živých kanálov a archívu RTVS v externom prehrávači podporujúcom m3u8 playlisty. Taktiež ak pre svoje requesty využijú slovenskú IP, môžu obísť geoblocking, pretože po requeste z výslednej adresy playlistu sa už lokácia neoveruje. Skript je v dvoch verziách - pôvodný python, ktorý je viac proof of concept a php, ktorý bol vytvorený špeciálne na použitie na nejakom slovenskom free hostingu, keďže nájsť použiteľný python hosting je problém celosvetovo, nieto ešte na Slovensku...
 
 ## Rýchly prístup - príklady: (skopírovať link a vložiť do prehrávača)
 Na androidoch stačí kliknúť, MX Player, ale aj Blink-based prehliadače to prehrajú automaticky :) 
