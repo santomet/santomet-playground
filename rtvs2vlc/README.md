@@ -1,6 +1,9 @@
-# rtvs2vlc
-Video streamy je pohodlné prehrávať mimo prehliadač. Našťastie, na RTVS nie sú nijako extra chránené. Tento skript však prácu zjednodušuje. Taktiež ak sa hosťuje na zariadení so slovenskou IP, môže obísť geoblocking.
-## Rýchly prístup: (skopírovať link a vložiť do prehrávača)
+# RTVS2VLC
+Skripty sprístupňujú sledovanie živých kanálov a archívu RTVS v externom prehrávači podporujúcom m3u8 playlisty. Taktiež ak sa hosťujú na zariadení so slovenskou IP, môžu obísť geoblocking, pretože výsledná adresa playlistu už lokáciu neoveruje. Skript je v dvoch verziách - pôvodný python, ktorý je len proof of concept a môže byť dlhodobo užitočný ak geoblocking nie je problém a php, ktorý bol vytvorený špeciálne na použitie na nejakom slovenskom free hostingu.
+
+## Rýchly prístup - príklady: (skopírovať link a vložiť do prehrávača)
+Na androidoch stačí kliknúť, MX Player, ale aj Blink-based prehliadače to prehrajú automaticky :) 
+
 [STV 1](http://santomet.studenthosting.sk/rtvs2vlc.php?c=1&r=true)
 
 [STV 2](http://santomet.studenthosting.sk/rtvs2vlc.php?c=2&r=true)
