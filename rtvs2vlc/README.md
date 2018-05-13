@@ -7,6 +7,14 @@ Video streamy je pohodlné prehrávať mimo prehliadač. Našťastie, na RTVS ni
 
 [STV online](http://santomet.studenthosting.sk/rtvs2vlc.php?c=4&r=true)
 
+Taktiež je možné použiť jednoducho zapamätateľné redirect linky:
+
+```
+http://stv1.dopi.ci
+http://stv2.dopi.ci
+http://stv3.dopi.ci
+```
+
 
 [Archív: Slovensko - Švajčiarsko](http://santomet.studenthosting.sk/rtvs2vlc.php?c=155614&r=true)
 
@@ -32,6 +40,6 @@ Po spustení samotného skriptu s inými (alebo žiadnymi) argumentmi sa spustí
 
 ### Poznámky
 
-  - Skripty automaticky volia FullHD stream, no stáva sa, že aj ten je niekedy odkazovaný len na HD
+  - Oba skripty automaticky volia FullHD stream, no stáva sa, že aj ten je niekedy odkazovaný len na HD
   - STV 2 je zdvojené na číslach 2 aj 3, takže v prípade tretieho "bonusového" kanálu označovaného ako Online je potrebné zvoliť 4
   - Výsledná adresa často nekontroluje geolokáciu. Slovenskú IP musíte mať iba počas spustenia skriptu ;)
