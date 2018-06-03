@@ -1,0 +1,17 @@
+<playlist>
+  <channel system="System" site="Site" enabled="true" name="DPMB-CONTROL">
+    <alias_list_name/>
+    <source_configuration type="sourceConfigTuner" frequency="460690000" source_type="TUNER"/>
+    <decode_configuration type="decodeConfigMPT1327" sync="NORMAL" call_timeout="191" traffic_channel_pool_size="10" afc="false" AFCMaximumCorrection="1000">
+      <channelMapName>DPMB_test1</channelMapName>
+    </decode_configuration>
+    <record_configuration>
+      <recorder>AUDIO</recorder>
+    </record_configuration>
+    <event_log_configuration/>
+    <aux_decode_configuration/>
+  </channel>
+  <channel_map name="DPMB_test1">
+    <range base="460030000" first="1" last="100" size="20000"/>
+  </channel_map>
+</playlist>

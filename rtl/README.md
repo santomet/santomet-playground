@@ -12,3 +12,6 @@ script for switching between original DVB-T drivers and the osmo-sdr. Basically 
 - UNPLUG device!
 - run rtlswitch -r
 - PLUG in device!
+
+## SDRTrunk channels
+backed up playlists of trunks i have found in my location
