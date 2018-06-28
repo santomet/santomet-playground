@@ -11,12 +11,16 @@ function redirect($url, $statusCode = 303)
 
 $channel = "1";
 $redirect = false;
+$showinbrowser = false;
 
 if (isset($_GET["c"]))
     $channel = htmlspecialchars($_GET["c"]);
 
 if (isset($_GET["r"]) and htmlspecialchars($_GET["r"]) == "true")
     $redirect = true;
+
+if (isset($_GET["b"]) and htmlspecialchars($_GET["b"]) == "true")
+    $showinbrowser = true;
 
 $url = "http://www.rtvs.sk/json/live5.json?c=" . $channel . "&b=chrome&p=linux&v=64&f=0&d=1";
 
@@ -54,7 +58,35 @@ $lines = explode("\n", $response);
 
 $finalurl = $url_base . $lines[5];
 
-if ($redirect)
+if($showinbrowser) { ?>
+
+    <head>
+  <link href="https://vjs.zencdn.net/7.0.3/video-js.css" rel="stylesheet">
+
+  <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+  <script src="http://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
+</head>
+
+<body>
+  <video id="my-video" class="video-js" controls preload="auto" width="640" height="264"
+  poster="MY_VIDEO_POSTER.jpg" data-setup="{}">
+    <source
+     src="<?php echo $finalurl; ?>"
+     type="application/x-mpegURL">
+    <p class="vjs-no-js">
+      To view this video please enable JavaScript, and consider upgrading to a web browser that
+      <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+    </p>
+  </video>
+
+  <script src="https://vjs.zencdn.net/7.0.3/video.js"></script>
+  <script src="videojs.hls.min.js"></script>
+</body>
+
+<?php }
+
+
+elseif ($redirect)
     redirect($finalurl);
 else
     echo $finalurl;

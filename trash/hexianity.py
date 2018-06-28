@@ -2,6 +2,7 @@
 # of my readers. Couldn't find good easy-to-use online tool...
 # conversion between big and little endian hex numbers
 #  18 <==> 81 (0001 1000 <==> 1000 0001)
+import sys
 
 def hexianity(num):
     res = []
@@ -14,3 +15,6 @@ def hexianity(num):
         newch = hex(int(b,2))[2:]
         res.append(newch)
     print("".join(res).upper())
+
+
+hexianity(sys.argv[1])
