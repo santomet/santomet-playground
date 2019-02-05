@@ -1,0 +1,37 @@
+#!/bin/bash
+# default program to stream is czech CT Sport from Brno transponder
+frequency=514000000
+program=274
+usedvbt2=1
+port=8080
+
+while [ "$1" != "" ]; do
+    case $1 in
+        -f | --frequency )      shift
+                                frequency=$1
+                                ;;
+        -p | --program )        shift
+                                program=$1
+                                ;;
+        -P | --port )           shift
+                                port=$1
+                                ;;
+        -t | --dvbttwo )        usedvbt2=1
+                                exit
+                                ;;
+        * )                     usage
+                                exit 1
+    esac
+    shift
+done
+
+dvbtstring='dvb-t://frequency='$frequency
+if [[ $usedvbt2 == 1 ]]; then
+dvbtstring='dvb-t2://frequency='$frequency
+fi
+
+echo $dvbtstring
+echo $program
+echo $port
+
+eval 'cvlc -I dummy '$dvbtstring' --dvb-bandwidth=8 --ts-es-id-pid --program='$program' --no-sout-all --sout-keep --sout '"'"'#transcode{scodec=none}:http{mux=ts,dst=:'$port/'}}'"'"
