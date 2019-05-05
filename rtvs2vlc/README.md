@@ -1,4 +1,6 @@
 # RTVS2VLC
+## UPDATE: Vyzerá to tak, že súdruovia začali geoblockovať úplne všetky requesty. Preto tento projekt a jeho inštancia na santomet.studenthosting.sk už postráda zmysel. Na získavanie samotnej adresy streamu odporúčam [streamlink](https://github.com/streamlink/streamlink)
+
 Skripty sprístupňujú sledovanie živých kanálov a archívu RTVS v externom prehrávači podporujúcom m3u8 playlisty. Taktiež ak pre svoje requesty využijú slovenskú IP, môžu obísť geoblocking, pretože po requeste z výslednej adresy playlistu sa už lokácia neoveruje. Skript je v dvoch verziách - pôvodný python, ktorý je viac proof of concept a php, ktorý bol vytvorený špeciálne na použitie na nejakom slovenskom free hostingu, keďže nájsť použiteľný python hosting je problém celosvetovo, nieto ešte na Slovensku...
 
 ## Rýchly prístup - príklady: (skopírovať link a vložiť do prehrávača)
