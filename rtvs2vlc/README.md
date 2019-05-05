@@ -28,10 +28,12 @@ http://santomet.studenthosting.sk/rtvs2vlc.php?c=1&r=true
 ```
   - c je číslo kanála. STV1 je n čísle 1. Taktiež môžeš použiť číslo relácie z archívu (posledná časť adresy)
   - r volí, že sa má adresa presmerovať kódom 303. Ináč sa adresa na playlist len vypíše (oba spôsoby by mali fungovať vo VLC)
-  - NEW: b volí, že sa má stream načítať vo videojs-contrib-hls prehrávači priamo v browseri. ``` http://santomet.studenthosting.sk/rtvs2vlc.php?c=1&b=true ```
+  - b volí, že sa má stream načítať vo videojs-contrib-hls prehrávači priamo v browseri. ``` http://santomet.studenthosting.sk/rtvs2vlc.php?c=1&b=true ```
+  - q volí kvalitu. ```"auto"``` je defaultná hodnota, ktorá zobrazí adresu na pôvodný m3u8 playlist. Môžete však špecifikovať ```"1080"```, ```"720"```, ```"480"``` alebo ```"360"```
 
 
 ## Python verzia
+UŽ DÁVNO NEFUNGUJE
 Potrebuješ python3.
 Najjednoduchšie použitie pre linux userov: 
 ```sh

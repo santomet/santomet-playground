@@ -12,6 +12,7 @@ function redirect($url, $statusCode = 303)
 $channel = "1";
 $redirect = false;
 $showinbrowser = false;
+$quality = "auto";
 
 if (isset($_GET["c"]))
     $channel = htmlspecialchars($_GET["c"]);
@@ -21,6 +22,10 @@ if (isset($_GET["r"]) and htmlspecialchars($_GET["r"]) == "true")
 
 if (isset($_GET["b"]) and htmlspecialchars($_GET["b"]) == "true")
     $showinbrowser = true;
+
+if (isset($_GET["q"]))
+    $quality = htmlspecialchars($_GET["q"]);
+
 
 $url = "http://www.rtvs.sk/json/live5.json?c=" . $channel . "&b=chrome&p=linux&v=64&f=0&d=1";
 
@@ -42,21 +47,38 @@ curl_close($ch);
 
 $arr = json_decode($response);
 $url_m3u8 = $arr[0]->{"sources"}[0]->{"file"};
-$strpos = strrpos($url_m3u8, "/");
-$url_base = substr($url_m3u8, 0, $strpos+1);
+$finalurl = $url_m3u8;
 
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $url_m3u8);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
-// This is what solved the issue (Accepting gzip encoding)
-curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
-$response = curl_exec($ch);
+if($quality != "auto") {
+    $strpos = strrpos($url_m3u8, "/");
+    $url_base = substr($url_m3u8, 0, $strpos+1);
+    $strpos = strrpos($url_m3u8, "?");
+    $authpart = substr($url_m3u8, $strpos);
+    $qualityindex = 5;
 
-$lines = explode("\n", $response);
+    if($quality == "720")
+        $qualityindex = 3;
+    if($quality == "1080")
+        $qualityindex = 5;
+    if($quality == "480")
+        $qualityindex = 7;
+    if($quality == "360")
+        $qualityindex = 9;
 
-$finalurl = $url_base . $lines[5];
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url_m3u8);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
+    // This is what solved the issue (Accepting gzip encoding)
+    curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
+    $response = curl_exec($ch);
+
+    $lines = explode("\n", $response);
+
+    $finalurl = $url_base . $lines[$qualityindex] . $authpart;
+}
 
 if($showinbrowser) { ?>
 
