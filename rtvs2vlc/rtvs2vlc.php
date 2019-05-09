@@ -8,11 +8,31 @@ function redirect($url, $statusCode = 303)
    die();
 }
 
+function get_headers_from_curl_response($response)
+{
+    $headers = array();
+
+    $header_text = substr($response, 0, strpos($response, "\r\n\r\n"));
+
+    foreach (explode("\r\n", $header_text) as $i => $line)
+        if ($i === 0)
+            $headers['http_code'] = $line;
+        else
+        {
+            list ($key, $value) = explode(': ', $line);
+
+            $headers[$key] = $value;
+        }
+
+    return $headers;
+}
+
 
 $channel = "1";
 $redirect = false;
 $showinbrowser = false;
 $quality = "auto";
+$experimental = false;
 
 if (isset($_GET["c"]))
     $channel = htmlspecialchars($_GET["c"]);
@@ -25,6 +45,9 @@ if (isset($_GET["b"]) and htmlspecialchars($_GET["b"]) == "true")
 
 if (isset($_GET["q"]))
     $quality = htmlspecialchars($_GET["q"]);
+
+if (isset($_GET["e"]) and htmlspecialchars($_GET["e"]) == "true")
+    $experimental = true;
 
 
 $url = "http://www.rtvs.sk/json/live5.json?c=" . $channel . "&b=chrome&p=linux&v=64&f=0&d=1";
@@ -47,7 +70,23 @@ curl_close($ch);
 
 $arr = json_decode($response);
 $url_m3u8 = $arr[0]->{"sources"}[0]->{"file"};
+
+
+//get final playlist url from header (we do not use AUTH aftwe this)
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, $url_m3u8);
+curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+curl_setopt($ch, CURLOPT_HEADER, true);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+// This is what solved the issue (Accepting gzip encoding)
+curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
+$response = curl_exec($ch);
+$headers = get_headers_from_curl_response($response);
+$url_m3u8 = $headers["Location"];
+
 $finalurl = $url_m3u8;
+$url_base = "";
+$experimental_m3u8 = "";
 
 if($quality != "auto") {
     $strpos = strrpos($url_m3u8, "/");
@@ -77,7 +116,27 @@ if($quality != "auto") {
 
     $lines = explode("\n", $response);
 
-    $finalurl = $url_base . $lines[$qualityindex] . $authpart;
+    $finalurl = $url_base . $lines[$qualityindex];
+}
+
+if($experimental) {
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $finalurl);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
+    // This is what solved the issue (Accepting gzip encoding)
+    curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
+    $response = curl_exec($ch);
+    
+    $lines = explode("\n", $response);
+    foreach ($lines as &$line) {
+        if(strpos($line, ".ts") != false) {
+            $line = $url_base . $line;
+        }
+    }
+    
+    $experimental_m3u8 = implode("\n", $lines);
 }
 
 if($showinbrowser) { ?>
@@ -110,6 +169,13 @@ if($showinbrowser) { ?>
 
 elseif ($redirect)
     redirect($finalurl);
+elseif ($experimental) {
+    header('Content-Disposition: attachment; filename="playlist.m3u8"');
+    header('Content-Type: text/plain');
+    header('Content-Length: ' . strlen($experimental_m3u8));
+    header('Connection: close');
+    echo $experimental_m3u8;
+    }
 else
     echo $finalurl;
 
