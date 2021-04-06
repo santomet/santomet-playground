@@ -3,7 +3,7 @@ Navrhoval by som sa zamerať na následujúce témy. Samozrejme je tu obrovský 
 
 ## 1. Základy o ochrane plášťa budovy, priestorov a infraštruktúry:
    - Legal disclaimer, informácie o predmete
-   - Paralela s hernou sériou Deus Ex :)
+   - Prečo to musíme riešiť my? Paralela s hernou sériou Deus Ex :)
    - Predstaviť potenciálne slabé články ktoré budeme rozoberať (Ľudský faktor, neriešené otvory v plášti, konštrukčné a stavebné chyby, zámky, prístupové systémy...), Poukázať na to, že nás zaujímajú presahy - motivovaný útočník využije každú možnosť
    - Existujúce normy a ich úrovne (dvere, okná, rámy, senzory, CCTV....)
    - Čo o FB hovorí ISO 27000 a ostatné security frameworky (dokopy nič)
