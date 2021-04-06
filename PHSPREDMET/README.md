@@ -2,11 +2,14 @@ Navrhoval by som sa zamerať na následujúce témy. Samozrejme je tu obrovský 
 
 
 ## 1. Základy o ochrane plášťa budovy, priestorov a infraštruktúry:
-   - Poukázať na potenciálne slabé články ktoré budeme rozoberať (Ľudský faktor, neriešené otvory v plášti, konštrukčné a stavebné chyby, zámky, prístupové systémy...)
+   - Legal disclaimer, informácie o predmete
+   - Paralela s hernou sériou Deus Ex :)
+   - Predstaviť potenciálne slabé články ktoré budeme rozoberať (Ľudský faktor, neriešené otvory v plášti, konštrukčné a stavebné chyby, zámky, prístupové systémy...), Poukázať na to, že nás zaujímajú presahy - motivovaný útočník využije každú možnosť
    - Existujúce normy a ich úrovne (dvere, okná, rámy, senzory, CCTV....)
-   - Prečo sa nespoliehať na normy (bezpečnosť sa nedá štandardizovať, je to hra na mačku a myš - ukázať napr. absurditu snahy NBÚ štandardizovať odolnosť voči bumpingu)
-   - Prečo sa nespoliehať na integrátorov a zámočníkov a byť pri celom procese zabezpečovania (laxný prístup, nevzdelávanie sa a následná nekompetencia, zvyk nadradzovať funkčnosť a pohodlnosť nad bezpečnosťou)
-
+   - Čo o FB hovorí ISO 27000 a ostatné security frameworky (dokopy nič)
+   - Prečo sa nespoliehať na normy (bezpečnosť je vždy hra na mačku a myš, súboj kreativity "out of the box", nedá sa dokonale štandardizovať a zakonzervovať na niekoľko rokov - ukázať napr. absurditu snahy NBÚ štandardizovať odolnosť voči bumpingu)
+   - Prečo sa nespoliehať na integrátorov a zámočníkov a byť pri celom procese zabezpečovania (laxný prístup, nevzdelávanie sa a následná nekompetencia, zvyk nadradzovať funkčnosť a pohodlnosť nad bezpečnosť)
+   - V inštitúciách väčšinou zodpovednosť za fyzickú bezpečnosť a jej prvky implicitne preberajú tajomníci ktorí nemajú základy v žiadnom príbuznom odbore. Zmeniť to alebo s nimi úzko spolupracovať!!
 
 ## 2. Ľudský faktor (presahy s personálnou bezpečnosťou)
    - Na vrátniciach Vás aj tak väčšinou pustia s dobrým pretextom a niekedy Vám dajú aj kľúč
