@@ -1,4 +1,4 @@
-Navrhoval by som sa zamerať na následujúce témy. Podotýkam, že každá je na jednu naozaj plnohodnotnú prednášku a väčšina by mala byť ukázaná hlavne z pohľadu útočníka s praktickými ukážkami, pretože expert si musí v prvom rade uvedomovať možnosti na ktoré sa zamerať.
+Navrhoval by som sa zamerať na následujúce témy. Samozrejme je tu obrovský priestor pre doplnenie (najmä pri EZS budú určite existovať ľudia ktorí vedia viac)
 
 
 ## 1. Základy o ochrane plášťa budovy, priestorov a infraštruktúry:
