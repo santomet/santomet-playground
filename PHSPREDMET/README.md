@@ -60,4 +60,4 @@ Navrhoval by som sa zamerať na následujúce témy. Podotýkam, že každá je 
    - Špecializované nástroje pre tieto zámky - ako sa používajú, kde sa dajú zohnať, ako ich tajné služby vyvíjajú
    - Bonus: Autozámky a lockless odomykanie áut (aj tam môžu byť zaujímavé veci pre neskorší lateral movement)
 
-+ Praktické ukážky a cvičenia, ideálne v spolupráci s H&B, ale tí sa možno nebudú chcieť deliť o know-how. V takom prípade by bol super budget a aj nejaký priestor, nástroje a cvičné zariadenia (zámky, EZS...) vrámci FI.
+## 9.... Praktické ukážky a cvičenia, ideálne v spolupráci s H&B, ale tí sa možno nebudú chcieť deliť o know-how. V takom prípade by bol super budget a aj nejaký priestor, nástroje a cvičné zariadenia (zámky, EZS...) vrámci FI.
