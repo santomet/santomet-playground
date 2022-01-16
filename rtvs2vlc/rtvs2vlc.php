@@ -50,9 +50,9 @@ if (isset($_GET["e"]) and htmlspecialchars($_GET["e"]) == "true")
     $experimental = true;
 
 
-$url = "http://www.rtvs.sk/json/live5.json?c=" . $channel . "&b=chrome&p=linux&v=64&f=0&d=1";
+$url = "https://www.rtvs.sk/json/live5f.json?c=" . $channel . "&b=chrome&p=linux&v=64&f=0&d=1";
 
-if ((int)$channel > 6)
+if ((int)$channel > 100)
     $url = "http://www.rtvs.sk/json/archive5.json?id=" . $channel . "&b=chrome&p=linux&v=64&f=0&d=1";
 
 
@@ -64,12 +64,17 @@ curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true );
 // This is what solved the issue (Accepting gzip encoding)
 curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
 $response = curl_exec($ch);
+
+if (curl_errno($ch)) { 
+   print curl_error($ch); 
+} 
+
 curl_close($ch);
 #echo $response;
 #echo "HELLO\n";
 
 $arr = json_decode($response);
-$url_m3u8 = $arr[0]->{"sources"}[0]->{"file"};
+$url_m3u8 = $arr->{"clip"}->{"sources"}[0]->{"src"};
 
 
 //get final playlist url from header (we do not use AUTH aftwe this)
@@ -87,6 +92,7 @@ $url_m3u8 = $headers["Location"];
 $finalurl = $url_m3u8;
 $url_base = "";
 $experimental_m3u8 = "";
+
 
 if($quality != "auto") {
     $strpos = strrpos($url_m3u8, "/");
