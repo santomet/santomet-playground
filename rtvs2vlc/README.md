@@ -7,10 +7,7 @@ Po prvej inštancii projektu urobili tesne pred hokejovými majstrovstvami súdr
 Rovnako pred časom urobili ďalšiu nepodstatnú zmenu, a keďže sa blíži olympiáda v Pekingu, tak som to znova spojazdnil.
 
 ## PHP verzia
-Stačí nahrať skript na php server so slovenskou IP. Kým mi to nezrušia, príklad je na následujúcej adrese. Tú stačí zadať do prehrávača:
-```
-http://santomet.studenthosting.sk/rtvs2vlc.php?c=1
-```
+Stačí nahrať skript na php server so slovenskou IP.
   - c je číslo kanála. STV1 je n čísle 1. Taktiež môžeš použiť číslo relácie z archívu (posledná časť adresy)
   - r volí, že sa má adresa presmerovať kódom 303. Ináč sa adresa na playlist len vypíše (oba spôsoby by mali fungovať vo VLC)
   - b volí, že sa má stream načítať vo videojs-contrib-hls prehrávači priamo v browseri. ``` rtvs2vlc.php?c=1&b=true ``` Nezlučiteľné s argumentom r !!!
