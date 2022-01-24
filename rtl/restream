@@ -1,0 +1,18 @@
+#!/bin/bash
+# Restreaming anything :)
+
+while [ "$1" != "" ]; do
+    case $1 in
+        -u | --url )            shift
+                                url=$1
+                                ;;
+        -p | --port )           shift
+                                port=$1
+    esac
+    shift
+done
+
+echo $url
+comand='cvlc -I dummy '$url' --sout-keep --sout '"'"'#http{mux=ts,dst=:'$port/'}'"'"
+echo $comand
+eval $comand
