@@ -23,5 +23,11 @@ This way streaming 1080p/50fps channel consumes only 10-20% of one Cortex A53@1G
 - -t | --dvbttwo 1/0 specifies if using DVB-T2 (default is yes)
 - -P | --port INT specifies open HTTP port for streaming
 
+# restream
+script that makes VLC to ingest some kind of stream and then restreams it. For example, if you have slow connection at the place where you have your antenna, but fast connection anywhere else, you can multiply your streaming possibilities this way...
+### restream switches:
+- -u | --url URL the streaming url to ingest
+- -p | --port INT the port for streaming out
+
 # SDRTrunk channels
 backed up playlists of trunks i have found in my location
