@@ -77,17 +77,18 @@ $arr = json_decode($response);
 $url_m3u8 = $arr->{"clip"}->{"sources"}[0]->{"src"};
 
 
+//THIS PART IS COMMENTED OUT AS IT IS NOT NEEDED RIGHT NOW
 //get final playlist url from header (we do not use AUTH aftwe this)
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $url_m3u8);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-curl_setopt($ch, CURLOPT_HEADER, true);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+//$ch = curl_init();
+//curl_setopt($ch, CURLOPT_URL, $url_m3u8);
+//curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+//curl_setopt($ch, CURLOPT_HEADER, true);
+//curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 // This is what solved the issue (Accepting gzip encoding)
-curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
-$response = curl_exec($ch);
-$headers = get_headers_from_curl_response($response);
-$url_m3u8 = $headers["Location"];
+//curl_setopt($ch, CURLOPT_ENCODING, "gzip,deflate");     
+//$response = curl_exec($ch);
+//$headers = get_headers_from_curl_response($response);
+//$url_m3u8 = $headers["Location"];
 
 $finalurl = $url_m3u8;
 $url_base = "";
