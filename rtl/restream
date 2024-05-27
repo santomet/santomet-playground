@@ -13,6 +13,6 @@ while [ "$1" != "" ]; do
 done
 
 echo $url
-comand='cvlc -I dummy '$url' --sout-keep --sout '"'"'#http{mux=ts,dst=:'$port/'}'"'"
+comand='cvlc -I dummy '$url' -R --sout-keep --sout '"'"'#http{mux=ts,dst=:'$port/'}'"'"
 echo $comand
 eval $comand
